@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global background pattern */
+body {
+  background-color: #fcfaf8;
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .indian-pattern {
+    background-image: url("/patterns/indian-pattern.png");
+    background-repeat: repeat;
+    background-size: 320px 320px;
+    background-attachment: fixed;
+  }
+}
+
+/* Fallback styles for custom colors if Tailwind config is missing */
+:root {
+  --primary: #d97706;
+  --bg-light: #fcfaf8;
+  --bg-dark: #1b160d;
+}
+
+.bg-primary { background-color: var(--primary); }
+.text-primary { color: var(--primary); }
+.bg-background-light { background-color: var(--bg-light); }
+.bg-background-dark { background-color: var(--bg-dark); }
+
+/* Manual fix for opacity modifiers if config is missing */
+.bg-background-light\/80 { background-color: rgba(252, 250, 248, 0.8); }
+.dark .bg-background-dark\/80 { background-color: rgba(27, 22, 13, 0.8); }
