@@ -1,0 +1,53 @@
+.sponsorsPage { width: 100%; }
+.heroSection {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--white);
+  padding: 4rem 0 3rem;
+  text-align: center;
+}
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; }
+.pageTitle { font-size: 3rem; margin-bottom: 1rem; }
+.pageSubtitle { font-size: 1.2rem; opacity: 0.95; }
+.sponsorsSection { padding: 3rem 0; }
+.tierSection { margin-bottom: 4rem; }
+.tierTitle { text-align: center; margin-bottom: 2rem; color: var(--primary-color); }
+.sponsorsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+.sponsorCard {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: transform var(--transition-base);
+}
+.sponsorCard:hover { transform: translateY(-5px); }
+.sponsorLogo { margin-bottom: 1.5rem; }
+.logoPlaceholder {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  background-color: var(--primary-light);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 700;
+}
+.sponsorName { font-size: 1.5rem; margin-bottom: 1rem; }
+.sponsorDescription { color: var(--text-secondary); margin-bottom: 1.5rem; }
+.sponsorLink {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+.loading { text-align: center; padding: 4rem; }
+@media (max-width: 768px) {
+  .pageTitle { font-size: 2rem; }
+  .sponsorsGrid { grid-template-columns: 1fr; }
+}

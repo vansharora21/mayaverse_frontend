@@ -1,0 +1,166 @@
+.profilePage {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.profileCard {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.profileCard h2 {
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.infoRow:last-child {
+  border-bottom: none;
+}
+
+.infoRow strong {
+  color: var(--text-primary);
+}
+
+.infoRow span {
+  color: var(--text-secondary);
+}
+
+.statsCards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.statCard {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.statNumber {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.ordersSection {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.ordersSection h2 {
+  margin-bottom: 1.5rem;
+}
+
+.ordersGrid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.orderCard {
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.orderId {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.orderStatus {
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.orderStatus.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.orderStatus.processing {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.orderStatus.shipped {
+  background-color: #e0e7ff;
+  color: #4338ca;
+}
+
+.orderStatus.delivered {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.orderDate {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.orderItems {
+  margin-bottom: 1rem;
+}
+
+.orderItem {
+  color: var(--text-secondary);
+  padding: 0.5rem 0;
+}
+
+.orderTotal {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray-200);
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 4rem;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .statsCards {
+    grid-template-columns: 1fr;
+  }
+}
