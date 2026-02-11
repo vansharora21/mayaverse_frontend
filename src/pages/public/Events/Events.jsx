@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getEvents, registerForEvent } from '../../../services/mockData';
 import { useAuth } from '../../../hooks/useAuth';
 import { formatDate, formatCurrency } from '../../../utils/helpers';
 import { EVENT_CATEGORIES } from '../../../constants/config';
+import { useGSAP } from '../../../animations/hooks/useGSAP';
+import { setupEventsAnimations } from '../../../animations/scenes/EventsAnimations';
 import styles from './Events.module.css';
 
 /**
- * MAYAVERSE - Events Page
+ * MAYAVERSE - Events Page (Trials Arena)
  * 
  * Displays all available events with filtering and registration.
+ * 
+ * ANIMATIONS:
+ * - Arena entrance (hero section)
+ * - Event cards pulse subtly
+ * - Category-based hover glow
+ * - Cards entrance on scroll
+ * - Filter button ripple effects
  */
 
 const Events = () => {
@@ -17,6 +26,26 @@ const Events = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [loading, setLoading] = useState(true);
   const { user, isAuthenticated, hasRegisteredForEvent } = useAuth();
+
+  // Refs for animated elements
+  const heroTitleRef = useRef(null);
+  const heroSubtitleRef = useRef(null);
+  const cardsContainerRef = useRef(null);
+  const filterButtonsRef = useRef(null);
+
+  // Initialize animations
+  useGSAP(() => {
+    if (loading) return;
+    if (!heroTitleRef.current) return;
+
+    const cleanup = setupEventsAnimations({
+      heroTitleRef,
+      heroSubtitleRef,
+      cardsContainerRef,
+      filterButtonsRef,
+    });
+    return cleanup;
+  }, [filteredEvents, loading]); // Re-run when events change or loading finishes
 
   useEffect(() => {
     loadEvents();
@@ -67,19 +96,21 @@ const Events = () => {
 
   return (
     <div className={styles.eventsPage}>
+      {/* Hero Section - Trials Arena */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
-          <h1 className={styles.pageTitle}>Events</h1>
-          <p className={styles.pageSubtitle}>
+          <h1 ref={heroTitleRef} className={styles.pageTitle}>Events</h1>
+          <p ref={heroSubtitleRef} className={styles.pageSubtitle}>
             Explore our exciting lineup of technical, cultural, and gaming events
           </p>
         </div>
       </section>
 
+      {/* Events Section */}
       <section className={styles.eventsSection}>
         <div className={styles.container}>
           {/* Category Filter */}
-          <div className={styles.filterBar}>
+          <div ref={filterButtonsRef} className={styles.filterBar}>
             <button
               className={`${styles.filterButton} ${selectedCategory === 'All' ? styles.active : ''}`}
               onClick={() => setSelectedCategory('All')}
@@ -98,17 +129,22 @@ const Events = () => {
           </div>
 
           {/* Events Grid */}
-          <div className={styles.eventsGrid}>
+          <div ref={cardsContainerRef} className={styles.eventsGrid}>
             {filteredEvents.map(event => (
-              <div key={event.id} className={styles.eventCard}>
+              <div
+                key={event.id}
+                className={styles.eventCard}
+                data-event-card
+                data-event-category={event.category}
+              >
                 <div className={styles.eventHeader}>
                   <span className={styles.eventCategory}>{event.category}</span>
                   <span className={styles.eventStatus}>{event.status}</span>
                 </div>
-                
+
                 <h3 className={styles.eventTitle}>{event.title}</h3>
                 <p className={styles.eventDescription}>{event.description}</p>
-                
+
                 <div className={styles.eventDetails}>
                   <div className={styles.eventDetail}>
                     <strong>📅 Date:</strong> {formatDate(event.date)}
@@ -138,8 +174,8 @@ const Events = () => {
                   onClick={() => handleRegister(event.id)}
                   disabled={hasRegisteredForEvent(event.id) || event.currentParticipants >= event.maxParticipants}
                 >
-                  {hasRegisteredForEvent(event.id) ? 'Already Registered' : 
-                   event.currentParticipants >= event.maxParticipants ? 'Full' : 'Register Now'}
+                  {hasRegisteredForEvent(event.id) ? 'Already Registered' :
+                    event.currentParticipants >= event.maxParticipants ? 'Full' : 'Register Now'}
                 </button>
               </div>
             ))}

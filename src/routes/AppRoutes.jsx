@@ -33,10 +33,10 @@ import AdminDashboard from '../pages/admin/AdminDashboard/AdminDashboard';
  * MAYAVERSE - Application Routes
  * 
  * This component defines all routes in the application.
- * Routes are organized into three categories:
- * 1. Public Routes - Accessible to everyone
- * 2. User Routes - Require authentication
- * 3. Admin Routes - Require admin authentication
+ * Routes are organized into:
+ * 1. Public Routes - Accessible to everyone (/, /home, /about, /events, etc.)
+ * 2. User Routes - Require authentication (/profile)
+ * 3. Admin Routes - Require admin authentication (/admin)
  * 
  * Each category uses its own layout component for consistent UI.
  */
@@ -46,6 +46,7 @@ const AppRoutes = () => {
     <Routes>
       {/* PUBLIC ROUTES - Wrapped in PublicLayout */}
       <Route element={<PublicLayout />}>
+        <Route path="/" element={<Home />} />
         <Route path={ROUTES.HOME} element={<Home />} />
         <Route path={ROUTES.ABOUT} element={<About />} />
         <Route path={ROUTES.EVENTS} element={<Events />} />

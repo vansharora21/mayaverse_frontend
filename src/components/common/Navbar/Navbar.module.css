@@ -1,140 +1,191 @@
-.navbar {
+/* Header Strip - Minimalist */
+.header {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  background-color: var(--white);
-  box-shadow: var(--shadow-md);
-  z-index: var(--z-sticky);
-  height: var(--header-height);
-}
-
-.container {
-  max-width: var(--max-width-wide);
-  margin: 0 auto;
-  padding: 0 2rem;
-  height: 100%;
+  width: 100%;
+  height: 80px;
+  z-index: 1000;
+  background: rgba(5, 5, 20, 0.8);
+  /* Darker for contrast */
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  /* Center Logo */
   align-items: center;
+  transition: transform 0.4s ease-in-out;
+  padding: 0 2rem;
 }
 
+.headerHidden {
+  transform: translateY(-100%);
+}
+
+.headerVisible {
+  transform: translateY(0);
+}
+
+/* Hamburger Button */
+.hamburger {
+  position: absolute;
+  left: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1002;
+  /* Above logo */
+}
+
+.bar {
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.hamburger:hover .bar {
+  background: #00f2fe;
+  box-shadow: 0 0 10px #00f2fe;
+}
+
+/* Animate Hamburger to X */
+.hamburgerOpen .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+
+.hamburgerOpen .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerOpen .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* Center Logo */
 .logo {
-  font-size: 1.75rem;
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.5rem;
   font-weight: 700;
-  font-family: var(--font-heading);
-  color: var(--primary-color);
+  text-transform: uppercase;
+  color: white;
   text-decoration: none;
-  transition: color var(--transition-base);
+  letter-spacing: 4px;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
 }
 
 .logo:hover {
-  color: var(--primary-dark);
+  text-shadow: 0 0 10px #ff00de, 0 0 20px #00f2fe;
 }
 
+/* Side Drawer */
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  /* Drawer width */
+  height: 100vh;
+  background: #050510;
+  /* Deep dark background */
+  z-index: 1001;
+  /* Above header bg, below hamburger z-index if needed, but hamburger is inside header? No, make hamburger high z-index */
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+  border-right: 1px solid rgba(138, 124, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  /* Space for hamburger */
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+/* Overlay for Drawer */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.overlayOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Navigation Links in Drawer */
 .navLinks {
   display: flex;
-  list-style: none;
-  gap: 2rem;
-  margin: 0;
-  padding: 0;
+  flex-direction: column;
+  padding: 0 2rem;
+  gap: 1.5rem;
 }
 
 .navLink {
-  color: var(--text-primary);
   text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
   font-weight: 500;
-  transition: color var(--transition-base);
-  position: relative;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
 }
 
 .navLink:hover {
-  color: var(--primary-color);
+  color: #00f2fe;
+  padding-left: 10px;
+  /* Slight movement */
+  text-shadow: 0 0 10px #00f2fe;
 }
 
-.navLink::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: var(--primary-color);
-  transition: width var(--transition-base);
+/* Drawer Footer (Auth) */
+.drawerFooter {
+  margin-top: auto;
+  /* Push to bottom */
+  padding: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.navLink:hover::after {
+.authButton {
+  display: block;
   width: 100%;
-}
-
-.authButtons {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.loginButton,
-.signupButton,
-.profileButton,
-.logoutButton {
-  padding: 0.5rem 1.5rem;
-  border-radius: var(--radius-md);
-  font-weight: 500;
+  padding: 1rem;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(138, 124, 255, 0.2) 0%, rgba(138, 124, 255, 0) 100%);
+  border: 1px solid rgba(138, 124, 255, 0.5);
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 8px;
   text-decoration: none;
-  transition: all var(--transition-base);
-  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.loginButton {
-  color: var(--primary-color);
-  background-color: transparent;
-  border: 2px solid var(--primary-color);
-}
-
-.loginButton:hover {
-  background-color: var(--primary-color);
-  color: var(--white);
-}
-
-.signupButton {
-  color: var(--white);
-  background-color: var(--primary-color);
-  border: 2px solid var(--primary-color);
-}
-
-.signupButton:hover {
-  background-color: var(--primary-dark);
-  border-color: var(--primary-dark);
-}
-
-.profileButton {
-  color: var(--text-primary);
-  background-color: var(--gray-100);
-  border: 2px solid var(--gray-200);
-}
-
-.profileButton:hover {
-  background-color: var(--gray-200);
-}
-
-.logoutButton {
-  color: var(--white);
-  background-color: var(--error);
-  border: 2px solid var(--error);
-}
-
-.logoutButton:hover {
-  background-color: #dc2626;
-  border-color: #dc2626;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .navLinks {
-    display: none;
-  }
-  
-  .container {
-    padding: 0 1rem;
-  }
+.authButton:hover {
+  background: rgba(138, 124, 255, 0.3);
+  border-color: #ff00de;
+  box-shadow: 0 0 15px rgba(255, 0, 222, 0.3);
 }

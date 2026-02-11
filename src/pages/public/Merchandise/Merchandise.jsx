@@ -1,14 +1,93 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getMerchandise } from '../../../services/mockData';
 import { formatCurrency } from '../../../utils/helpers';
 import { MERCH_CATEGORIES } from '../../../constants/config';
+import { useGSAP } from '../../../animations/hooks/useGSAP';
 import styles from './Merchandise.module.css';
+
+/**
+ * MAYAVERSE - Merchandise Page (Rift Market)
+ * 
+ * Browse and purchase exclusive techfest merchandise.
+ * 
+ * ANIMATIONS:
+ * - Rift-style page entry
+ * - Red lightning flashes (CSS + GSAP)
+ * - Product portal pulsing
+ * 
+ * To enable full animations, implement MerchandiseAnimations.js from the guide
+ */
 
 const Merchandise = () => {
   const [merchandise, setMerchandise] = useState([]);
   const [filteredMerch, setFilteredMerch] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [loading, setLoading] = useState(true);
+
+  // Refs for animated elements
+  const heroTitleRef = useRef(null);
+  const heroSubtitleRef = useRef(null);
+  const riftOverlayRef = useRef(null);
+  const containerRef = useRef(null);
+  const productsRef = useRef(null);
+
+  // Rift entry animation
+  useGSAP(() => {
+    if (!riftOverlayRef.current || !heroTitleRef.current) return;
+
+    const { gsap } = window;
+    if (!gsap) return;
+
+    const tl = gsap.timeline();
+
+    // Rift opens
+    tl.from(riftOverlayRef.current, {
+      scaleX: 0,
+      duration: 1.5,
+      ease: 'power4.inOut',
+    })
+    .to(riftOverlayRef.current, {
+      opacity: 0,
+      duration: 0.5,
+    })
+    // Hero reveals
+    .from(heroTitleRef.current, {
+      opacity: 0,
+      scale: 0.8,
+      duration: 1,
+      ease: 'power2.out',
+    }, '-=0.5')
+    .from(heroSubtitleRef.current, {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+    }, '-=0.6');
+
+    return () => tl.kill();
+  }, []);
+
+  // Lightning flash effect
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
+    const { gsap } = window;
+    if (!gsap) return;
+
+    const flash = () => {
+      gsap.to(containerRef.current, {
+        boxShadow: 'inset 0 0 100px rgba(239, 68, 68, 0.8)',
+        duration: 0.05,
+        yoyo: true,
+        repeat: 1,
+        onComplete: () => {
+          gsap.delayedCall(3 + Math.random() * 5, flash);
+        },
+      });
+    };
+
+    const timer = setTimeout(flash, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     loadMerchandise();
@@ -41,18 +120,24 @@ const Merchandise = () => {
   if (loading) return <div className={styles.loading}>Loading merchandise...</div>;
 
   return (
-    <div className={styles.merchPage}>
+    <div className={styles.merchPage} ref={containerRef}>
+      {/* Rift Overlay */}
+      <div ref={riftOverlayRef} className={styles.riftOverlay} />
+
+      {/* Hero Section - Rift Market */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
-          <h1 className={styles.pageTitle}>Merchandise</h1>
-          <p className={styles.pageSubtitle}>
+          <h1 ref={heroTitleRef} className={styles.pageTitle}>Merchandise</h1>
+          <p ref={heroSubtitleRef} className={styles.pageSubtitle}>
             Get exclusive techfest merchandise and collectibles
           </p>
         </div>
       </section>
 
+      {/* Merchandise Section */}
       <section className={styles.merchSection}>
         <div className={styles.container}>
+          {/* Category Filter */}
           <div className={styles.filterBar}>
             <button
               className={`${styles.filterButton} ${selectedCategory === 'All' ? styles.active : ''}`}
@@ -71,9 +156,14 @@ const Merchandise = () => {
             ))}
           </div>
 
-          <div className={styles.merchGrid}>
+          {/* Products Grid */}
+          <div ref={productsRef} className={styles.merchGrid}>
             {filteredMerch.map(item => (
-              <div key={item.id} className={styles.merchCard}>
+              <div 
+                key={item.id} 
+                className={styles.merchCard}
+                data-merch-card
+              >
                 <div className={styles.merchImage}>
                   <div className={styles.imagePlaceholder}>{item.name[0]}</div>
                   {item.stock < 20 && (

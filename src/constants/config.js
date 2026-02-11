@@ -22,7 +22,7 @@ export const SESSION_TIMEOUT = 3600000; // 1 hour in milliseconds
 // Routes - Public
 export const ROUTES = {
   // Public Routes
-  HOME: '/',
+  HOME: '/home',
   ABOUT: '/about',
   EVENTS: '/events',
   SPONSORS: '/sponsors',

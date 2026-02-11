@@ -4,94 +4,36 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mayaverse</title>
-
+    <meta name="description" content="MAYAVERSE - The Ultimate Technical Fest Experience" />
+    <title>MAYAVERSE - Technical Fest</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Cinzel:wght@400;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
-
-      :root {
-        --neon-cyan: #00f2fe;
-        --neon-pink: #ff00de;
-        --bg: #050505;
-      }
-
-      body {
+      /* RESET */
+      * {
         margin: 0;
-        background: var(--bg);
-        overflow: hidden;
+        padding: 0;
+        box-sizing: border-box;
       }
-
-      /* ===== PARALLAX INTRO ===== */
-      #parallax-intro {
-        position: fixed;
-        inset: 0;
-        background: var(--bg);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        pointer-events: none;
-      }
-
-      .parallax-title {
-        font-family: 'Syncopate', sans-serif;
-        font-size: clamp(2.2rem, 10vw, 7rem);
-        font-weight: 700;
-        letter-spacing: clamp(0.4rem, 4vw, 2rem);
-        color: white;
-        text-transform: uppercase;
-        animation:
-          introZoom 3.2s cubic-bezier(0.8, 0, 0.2, 1) forwards,
-          rgbShift 0.2s infinite;
-      }
-
-      @keyframes introZoom {
-        0% {
-          transform: scale(0.3);
-          opacity: 0;
-          filter: blur(30px);
-          letter-spacing: 5rem;
-        }
-        30% {
-          transform: scale(1.1);
-          opacity: 1;
-          filter: blur(0);
-        }
-        60% {
-          transform: scale(1);
-        }
-        100% {
-          transform: translateY(-40vh) scale(0.35);
-          opacity: 1;
-          filter: blur(1px);
-        }
-      }
-
-      @keyframes rgbShift {
-        0% { text-shadow: 4px 0 var(--neon-pink), -4px 0 var(--neon-cyan); }
-        50% { text-shadow: -4px 0 var(--neon-pink), 4px 0 var(--neon-cyan); }
-        100% { text-shadow: 4px 0 var(--neon-pink), -4px 0 var(--neon-cyan); }
+      
+      html, body {
+        width: 100%;
+        height: 100%;
+        font-family: 'Inter', sans-serif;
+        background: #000;
+        overflow-x: hidden;
       }
     </style>
   </head>
-
+  
   <body>
-    <!-- INTRO SCENE -->
-    <div id="parallax-intro">
-      <h1 class="parallax-title">PARALLAX</h1>
-    </div>
-
-    <!-- REACT SITE (HIDDEN BEHIND INTRO) -->
+    <!-- React Root -->
     <div id="root"></div>
+    
     <script type="module" src="/src/main.jsx"></script>
-
-    <!-- HARD CUT AFTER INTRO -->
-    <script>
-      setTimeout(() => {
-        const intro = document.getElementById('parallax-intro');
-        intro.remove();               // 🔥 HARD CUT
-        document.body.style.overflow = 'auto';
-      }, 3300); // must match animation duration
-    </script>
   </body>
 </html>

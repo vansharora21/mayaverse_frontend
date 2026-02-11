@@ -1,115 +1,93 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ROUTES, APP_NAME, APP_TAGLINE } from '../../../constants/config';
-import styles from './Home.module.css';
-
-/**
- * MAYAVERSE - Home Page
- * 
- * Landing page with hero section and quick access to main sections.
- * This page will later have:
- * - Scroll-based animations
- * - Parallax effects
- * - Video backgrounds
- */
+import React, { useEffect, useState, useRef } from 'react';
+import HeroScroll from '../../../components/home/HeroScroll';
+import RingScroll from '../../../components/home/RingScroll';
+import Events from '../../public/Events/Events';
+import Sponsors from '../../public/Sponsors/Sponsors';
+import Merchandise from '../../public/Merchandise/Merchandise';
+import ParallaxIntro from '../../../components/home/ParallaxIntro'; // Import Intro
 
 const Home = () => {
+  const [showIntro, setShowIntro] = useState(true); // Default to showing intro
+  const [isFading, setIsFading] = useState(false); // New fading state
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [videoRemoved, setVideoRemoved] = useState(false);
+  const videoRef = useRef(null);
+
+  // Ensure we start at top on refresh
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleIntroClick = () => {
+    if (isFading) return; // Prevent double clicks
+
+    setIsFading(true); // Start fade out
+
+    // Wait for fade animation (2s) before starting video
+    setTimeout(() => {
+      setShowIntro(false);
+      if (videoRef.current) {
+        videoRef.current.play().catch(e => console.error("Video play failed", e));
+      }
+    }, 2000);
+  };
+
+  const handleVideoEnd = () => {
+    setVideoEnded(true);
+    setTimeout(() => {
+      setVideoRemoved(true);
+    }, 1000);
+  };
+
   return (
-    <div className={styles.homePage}>
-      {/* Hero Section */}
-      <section className={styles.heroSection}>
-        <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>{APP_NAME}</h1>
-          <p className={styles.heroTagline}>{APP_TAGLINE}</p>
-          <div className={styles.heroButtons}>
-            <Link to={ROUTES.EVENTS} className={styles.primaryButton}>
-              Explore Events
-            </Link>
-            <Link to={ROUTES.ABOUT} className={styles.secondaryButton}>
-              Learn More
-            </Link>
-          </div>
+    <div className="home-container" style={{ backgroundColor: 'black', minHeight: '100vh', color: 'white' }}>
+
+      {/* 0a. Parallax Intro Overlay */}
+      {showIntro && <ParallaxIntro onStart={handleIntroClick} isFading={isFading} />}
+
+      {/* 0b. Video Overlay */}
+      {!videoRemoved && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          zIndex: 1000,
+          backgroundColor: 'black',
+          opacity: videoEnded ? 0 : 1,
+          transition: 'opacity 1s ease-out',
+          pointerEvents: videoEnded ? 'none' : 'auto',
+          // Video visible behind intro
+          visibility: 'visible'
+        }}>
+          <video
+            ref={videoRef}
+            src="/intro-assets/portal_travel.mp4"
+            muted
+            playsInline
+            onEnded={handleVideoEnd}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover'
+            }}
+          />
         </div>
-      </section>
+      )}
 
-      {/* Quick Stats Section */}
-      <section className={styles.statsSection}>
-        <div className={styles.container}>
-          <div className={styles.statsGrid}>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>50+</div>
-              <div className={styles.statLabel}>Events</div>
-            </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>5000+</div>
-              <div className={styles.statLabel}>Participants</div>
-            </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>100+</div>
-              <div className={styles.statLabel}>Colleges</div>
-            </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>₹10L+</div>
-              <div className={styles.statLabel}>Prize Money</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 1. Hero Scroll Section */}
+      <HeroScroll />
 
-      {/* Featured Sections */}
-      <section className={styles.featuredSection}>
-        <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>What We Offer</h2>
-          
-          <div className={styles.featuresGrid}>
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🏆</div>
-              <h3 className={styles.featureTitle}>Competitions</h3>
-              <p className={styles.featureDescription}>
-                Compete in technical, cultural, and gaming events with exciting prizes.
-              </p>
-              <Link to={ROUTES.EVENTS} className={styles.featureLink}>
-                View Events →
-              </Link>
-            </div>
+      {/* 2. Ring Scroll Section */}
+      <RingScroll />
 
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🎓</div>
-              <h3 className={styles.featureTitle}>Workshops</h3>
-              <p className={styles.featureDescription}>
-                Learn from industry experts through hands-on workshops and seminars.
-              </p>
-              <Link to={ROUTES.EVENTS} className={styles.featureLink}>
-                Join Workshops →
-              </Link>
-            </div>
-
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🛍️</div>
-              <h3 className={styles.featureTitle}>Merchandise</h3>
-              <p className={styles.featureDescription}>
-                Get exclusive techfest merchandise and collectibles.
-              </p>
-              <Link to={ROUTES.MERCHANDISE} className={styles.featureLink}>
-                Shop Now →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className={styles.ctaSection}>
-        <div className={styles.container}>
-          <h2 className={styles.ctaTitle}>Ready to Join?</h2>
-          <p className={styles.ctaText}>
-            Register now and be part of the biggest technical fest of the year!
-          </p>
-          <Link to={ROUTES.SIGNUP} className={styles.ctaButton}>
-            Sign Up Now
-          </Link>
-        </div>
-      </section>
+      {/* 3. Content Sections */}
+      <div className="content-sections" style={{ position: 'relative', zIndex: 10, backgroundColor: 'black' }}>
+        <Events />
+        <Sponsors />
+        <Merchandise />
+      </div>
     </div>
   );
 };

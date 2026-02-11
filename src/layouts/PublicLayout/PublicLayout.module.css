@@ -6,9 +6,8 @@
 
 .mainContent {
   flex: 1;
-  /* Add top padding to account for fixed navbar */
-  padding-top: var(--header-height);
-  
+  /* padding-top handled in component for Home page logic */
+
   /* This wrapper allows for:
    * 1. Page transitions (apply animation here)
    * 2. Scroll-based animations (observe scroll position)

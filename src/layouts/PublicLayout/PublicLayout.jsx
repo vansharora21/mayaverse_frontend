@@ -1,7 +1,8 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';
+import PortalTransition from '../../animations/transitions/PortalTransition';
 import styles from './PublicLayout.module.css';
 
 /**
@@ -10,25 +11,34 @@ import styles from './PublicLayout.module.css';
  * Layout for all public pages (Home, About, Events, etc.)
  * Includes:
  * - Navbar at the top
- * - Main content area (Outlet)
+ * - Main content area (Outlet) wrapped in PortalTransition
  * - Footer at the bottom
  * 
- * This layout will be perfect for adding page transitions later,
- * as all public pages share this structure.
+ * Portal transitions animate automatically when routes change.
  */
 
 const PublicLayout = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/' || location.pathname === '/home';
+
   return (
     <div className={styles.publicLayout}>
       {/* Navigation Bar */}
       <Navbar />
-      
-      {/* Main Content Area */}
+
+      {/* Main Content Area with Portal Transitions */}
       {/* The Outlet component renders the matched child route */}
-      <main className={styles.mainContent}>
-        <Outlet />
+      <main
+        className={styles.mainContent}
+        style={{
+          paddingTop: isHomePage ? 0 : 'var(--header-height)'
+        }}
+      >
+        <PortalTransition>
+          <Outlet />
+        </PortalTransition>
       </main>
-      
+
       {/* Footer */}
       <Footer />
     </div>

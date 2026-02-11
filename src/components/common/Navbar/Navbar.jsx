@@ -1,86 +1,94 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ROUTES, APP_NAME } from '../../../constants/config';
-import { useAuth } from '../../../hooks/useAuth';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
-/**
- * MAYAVERSE - Public Navbar Component
- * 
- * Navigation bar for public pages.
- * Shows different options based on authentication status.
- */
-
 const Navbar = () => {
-  const { isAuthenticated, user, logout } = useAuth();
-  const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(true);
+  const [isOpen, setIsOpen] = useState(false); // Drawer state
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/' || location.pathname === '/home';
 
-  const handleLogout = () => {
-    logout();
-    navigate(ROUTES.HOME);
+  useEffect(() => {
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY;
+
+      // Header Logic (Same as before)
+      if (isHomePage) {
+        if (currentScrollY > lastScrollY) {
+          setIsVisible(false); // Hide on Scroll Down
+        } else {
+          setIsVisible(true); // Show on Scroll Up
+        }
+
+        // Hide at very top initially? User phrasing was tricky.
+        // "until... scroll to the top... he wont see"
+        // Let's stick to standard behavior for now: Hide when scrolling down, Show when scrolling up.
+      } else {
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+    return () => window.removeEventListener('scroll', controlNavbar);
+  }, [lastScrollY, isHomePage]);
+
+  // Close drawer on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
+  const toggleDrawer = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.container}>
-        {/* Logo */}
-        <Link to={ROUTES.HOME} className={styles.logo}>
-          {APP_NAME}
+    <>
+      {/* Header Strip */}
+      <header className={`${styles.header} ${isVisible ? styles.headerVisible : styles.headerHidden}`}>
+        {/* Hamburger Button */}
+        <button
+          className={`${styles.hamburger} ${isOpen ? styles.hamburgerOpen : ''}`}
+          onClick={toggleDrawer}
+          aria-label="Menu"
+        >
+          <span className={styles.bar}></span>
+          <span className={styles.bar}></span>
+          <span className={styles.bar}></span>
+        </button>
+
+        {/* Center Logo */}
+        <Link to="/" className={styles.logo} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          PARALLAX
         </Link>
+      </header>
 
-        {/* Navigation Links */}
-        <ul className={styles.navLinks}>
-          <li>
-            <Link to={ROUTES.HOME} className={styles.navLink}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to={ROUTES.ABOUT} className={styles.navLink}>
-              About
-            </Link>
-          </li>
-          <li>
-            <Link to={ROUTES.EVENTS} className={styles.navLink}>
-              Events
-            </Link>
-          </li>
-          <li>
-            <Link to={ROUTES.SPONSORS} className={styles.navLink}>
-              Sponsors
-            </Link>
-          </li>
-          <li>
-            <Link to={ROUTES.MERCHANDISE} className={styles.navLink}>
-              Merchandise
-            </Link>
-          </li>
-        </ul>
+      {/* Backdrop Overlay */}
+      <div
+        className={`${styles.overlay} ${isOpen ? styles.overlayOpen : ''}`}
+        onClick={() => setIsOpen(false)}
+      />
 
-        {/* Auth Buttons */}
-        <div className={styles.authButtons}>
-          {isAuthenticated() ? (
-            <>
-              <Link to={ROUTES.USER_PROFILE} className={styles.profileButton}>
-                {user?.name}
-              </Link>
-              <button onClick={handleLogout} className={styles.logoutButton}>
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to={ROUTES.LOGIN} className={styles.loginButton}>
-                Login
-              </Link>
-              <Link to={ROUTES.SIGNUP} className={styles.signupButton}>
-                Sign Up
-              </Link>
-            </>
-          )}
+      {/* Side Drawer */}
+      <nav className={`${styles.drawer} ${isOpen ? styles.drawerOpen : ''}`}>
+        <div className={styles.navLinks}>
+          <Link to="/gallery" className={styles.navLink}>Gallery</Link>
+          <Link to="/events" className={styles.navLink}>Events</Link>
+          <Link to="/contact" className={styles.navLink}>Contact</Link>
+          <Link to="/sponsors" className={styles.navLink}>Sponsors</Link>
+          <Link to="/merchandise" className={styles.navLink}>Merchandise</Link>
+          <Link to="/about" className={styles.navLink}>About Us</Link>
         </div>
-      </div>
-    </nav>
+
+        <div className={styles.drawerFooter}>
+          <Link to="/login" className={styles.authButton}>
+            Login / Join
+          </Link>
+        </div>
+      </nav>
+    </>
   );
 };
 
