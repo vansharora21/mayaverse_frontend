@@ -3,21 +3,13 @@ import { getEvents, registerForEvent } from '../../../services/mockData';
 import { useAuth } from '../../../hooks/useAuth';
 import { formatDate, formatCurrency } from '../../../utils/helpers';
 import { EVENT_CATEGORIES } from '../../../constants/config';
-import { useGSAP } from '../../../animations/hooks/useGSAP';
-import { setupEventsAnimations } from '../../../animations/scenes/EventsAnimations';
+import RunestoneCard from '../../../components/events/RunestoneCard';
 import styles from './Events.module.css';
 
 /**
  * MAYAVERSE - Events Page (Trials Arena)
  * 
- * Displays all available events with filtering and registration.
- * 
- * ANIMATIONS:
- * - Arena entrance (hero section)
- * - Event cards pulse subtly
- * - Category-based hover glow
- * - Cards entrance on scroll
- * - Filter button ripple effects
+ * Displays events as cinematic 3D Runestone cards.
  */
 
 const Events = () => {
@@ -26,26 +18,6 @@ const Events = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [loading, setLoading] = useState(true);
   const { user, isAuthenticated, hasRegisteredForEvent } = useAuth();
-
-  // Refs for animated elements
-  const heroTitleRef = useRef(null);
-  const heroSubtitleRef = useRef(null);
-  const cardsContainerRef = useRef(null);
-  const filterButtonsRef = useRef(null);
-
-  // Initialize animations
-  useGSAP(() => {
-    if (loading) return;
-    if (!heroTitleRef.current) return;
-
-    const cleanup = setupEventsAnimations({
-      heroTitleRef,
-      heroSubtitleRef,
-      cardsContainerRef,
-      filterButtonsRef,
-    });
-    return cleanup;
-  }, [filteredEvents, loading]); // Re-run when events change or loading finishes
 
   useEffect(() => {
     loadEvents();
@@ -84,7 +56,7 @@ const Events = () => {
     try {
       await registerForEvent(user.id, eventId);
       alert('Successfully registered for event!');
-      loadEvents(); // Reload to update participant count
+      loadEvents();
     } catch (error) {
       alert(error.message || 'Failed to register for event');
     }
@@ -96,12 +68,12 @@ const Events = () => {
 
   return (
     <div className={styles.eventsPage}>
-      {/* Hero Section - Trials Arena */}
+      {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
-          <h1 ref={heroTitleRef} className={styles.pageTitle}>Events</h1>
-          <p ref={heroSubtitleRef} className={styles.pageSubtitle}>
-            Explore our exciting lineup of technical, cultural, and gaming events
+          <h1 className={styles.pageTitle}>The Trials Arena</h1>
+          <p className={styles.pageSubtitle}>
+            Unlock ancient runestones to reveal the challenges within
           </p>
         </div>
       </section>
@@ -110,7 +82,7 @@ const Events = () => {
       <section className={styles.eventsSection}>
         <div className={styles.container}>
           {/* Category Filter */}
-          <div ref={filterButtonsRef} className={styles.filterBar}>
+          <div className={styles.filterBar}>
             <button
               className={`${styles.filterButton} ${selectedCategory === 'All' ? styles.active : ''}`}
               onClick={() => setSelectedCategory('All')}
@@ -128,55 +100,22 @@ const Events = () => {
             ))}
           </div>
 
-          {/* Events Grid */}
-          <div ref={cardsContainerRef} className={styles.eventsGrid}>
+          {/* Events Grid — Runestone Cards */}
+          <div className={styles.eventsGrid}>
             {filteredEvents.map(event => (
-              <div
-                key={event.id}
-                className={styles.eventCard}
-                data-event-card
-                data-event-category={event.category}
-              >
-                <div className={styles.eventHeader}>
-                  <span className={styles.eventCategory}>{event.category}</span>
-                  <span className={styles.eventStatus}>{event.status}</span>
-                </div>
-
-                <h3 className={styles.eventTitle}>{event.title}</h3>
-                <p className={styles.eventDescription}>{event.description}</p>
-
-                <div className={styles.eventDetails}>
-                  <div className={styles.eventDetail}>
-                    <strong>📅 Date:</strong> {formatDate(event.date)}
-                  </div>
-                  <div className={styles.eventDetail}>
-                    <strong>🕐 Time:</strong> {event.time}
-                  </div>
-                  <div className={styles.eventDetail}>
-                    <strong>📍 Venue:</strong> {event.venue}
-                  </div>
-                  <div className={styles.eventDetail}>
-                    <strong>💰 Fee:</strong> {formatCurrency(event.registrationFee, 'INR')}
-                  </div>
-                  <div className={styles.eventDetail}>
-                    <strong>👥 Participants:</strong> {event.currentParticipants}/{event.maxParticipants}
-                  </div>
-                </div>
-
-                {event.prizes && event.prizes.length > 0 && (
-                  <div className={styles.prizes}>
-                    <strong>🏆 Prizes:</strong> {event.prizes.join(', ')}
-                  </div>
-                )}
-
-                <button
-                  className={styles.registerButton}
-                  onClick={() => handleRegister(event.id)}
-                  disabled={hasRegisteredForEvent(event.id) || event.currentParticipants >= event.maxParticipants}
-                >
-                  {hasRegisteredForEvent(event.id) ? 'Already Registered' :
-                    event.currentParticipants >= event.maxParticipants ? 'Full' : 'Register Now'}
-                </button>
+              <div key={event.id} className={styles.cardWrapper}>
+                <RunestoneCard
+                  event={{
+                    id: event.id,
+                    title: event.title,
+                    category: event.category,
+                    date: formatDate(event.date),
+                    time: event.time,
+                    venue: event.venue,
+                    description: event.description,
+                  }}
+                  onRegister={handleRegister}
+                />
               </div>
             ))}
           </div>

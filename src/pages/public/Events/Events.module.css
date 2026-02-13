@@ -1,191 +1,138 @@
+/* ============================================
+   EVENTS PAGE — Dark Cosmic Theme
+   ============================================ */
+
 .eventsPage {
   width: 100%;
+  background: linear-gradient(180deg, #06060e 0%, #0a0818 50%, #06060e 100%);
+  min-height: 100vh;
 }
 
+/* Hero */
 .heroSection {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: var(--white);
-  padding: 4rem 0 3rem;
+  background: radial-gradient(ellipse at 50% 80%, rgba(80, 40, 160, 0.15) 0%, transparent 60%),
+    linear-gradient(180deg, #0a0818 0%, #06060e 100%);
+  color: white;
+  padding: 6rem 0 4rem;
   text-align: center;
 }
 
 .container {
-  max-width: var(--max-width-wide);
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
 .pageTitle {
+  font-family: 'Cinzel', serif;
   font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: transparent;
+  background: linear-gradient(180deg, rgba(130, 180, 255, 0.95) 0%, rgba(180, 140, 255, 0.8) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 12px rgba(100, 140, 255, 0.4));
   margin-bottom: 1rem;
 }
 
 .pageSubtitle {
-  font-size: 1.2rem;
-  opacity: 0.95;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(180, 170, 210, 0.6);
+  letter-spacing: 2px;
 }
 
+/* Events Section */
 .eventsSection {
-  padding: 3rem 0;
+  padding: 3rem 0 6rem;
 }
 
+/* Filter Bar */
 .filterBar {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   justify-content: center;
 }
 
 .filterButton {
-  padding: 0.75rem 1.5rem;
-  background-color: var(--white);
-  color: var(--text-primary);
-  border: 2px solid var(--gray-200);
-  border-radius: var(--radius-md);
+  padding: 0.6rem 1.4rem;
+  background: transparent;
+  color: rgba(180, 170, 210, 0.6);
+  border: 1px solid rgba(120, 80, 200, 0.2);
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition: all 0.3s ease;
 }
 
 .filterButton:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
+  border-color: rgba(120, 80, 200, 0.5);
+  color: rgba(200, 180, 240, 0.9);
+  box-shadow: 0 0 15px rgba(100, 60, 200, 0.15);
 }
 
 .filterButton.active {
-  background-color: var(--primary-color);
-  color: var(--white);
-  border-color: var(--primary-color);
+  background: rgba(120, 80, 200, 0.15);
+  color: rgba(200, 180, 240, 1);
+  border-color: rgba(140, 100, 240, 0.5);
+  box-shadow: 0 0 20px rgba(120, 80, 200, 0.2);
 }
 
+/* Events Grid */
 .eventsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
-}
-
-.eventCard {
-  background-color: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
-  box-shadow: var(--shadow-md);
-  transition: transform var(--transition-base);
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: center;
 }
 
-.eventCard:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-}
-
-.eventHeader {
+.cardWrapper {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  justify-content: center;
 }
 
-.eventCategory {
-  background-color: var(--primary-light);
-  color: var(--white);
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--radius-full);
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.eventStatus {
-  background-color: var(--success);
-  color: var(--white);
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--radius-full);
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-transform: capitalize;
-}
-
-.eventTitle {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
-}
-
-.eventDescription {
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
-}
-
-.eventDetails {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background-color: var(--bg-secondary);
-  border-radius: var(--radius-md);
-}
-
-.eventDetail {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-}
-
-.eventDetail strong {
-  color: var(--text-primary);
-}
-
-.prizes {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background-color: #fef3c7;
-  border-radius: var(--radius-md);
-  color: #92400e;
-}
-
-.registerButton {
-  width: 100%;
-  padding: 1rem;
-  background-color: var(--primary-color);
-  color: var(--white);
-  border: none;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color var(--transition-base);
-}
-
-.registerButton:hover:not(:disabled) {
-  background-color: var(--primary-dark);
-}
-
-.registerButton:disabled {
-  background-color: var(--gray-400);
-  cursor: not-allowed;
-}
-
+/* No Events */
 .noEvents {
   text-align: center;
   padding: 4rem 2rem;
-  color: var(--text-secondary);
+  color: rgba(180, 170, 210, 0.4);
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.1rem;
 }
 
+/* Loading */
 .loading {
   text-align: center;
   padding: 4rem 2rem;
   font-size: 1.2rem;
+  color: rgba(180, 170, 210, 0.5);
+  background: #06060e;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .pageTitle {
     font-size: 2rem;
+    letter-spacing: 3px;
   }
-  
+
   .eventsGrid {
-    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .heroSection {
+    padding: 4rem 0 2rem;
   }
 }
