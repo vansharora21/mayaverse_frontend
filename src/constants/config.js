@@ -27,16 +27,16 @@ export const ROUTES = {
   EVENTS: '/events',
   SPONSORS: '/sponsors',
   MERCHANDISE: '/merchandise',
-  
+
   // Auth Routes
   LOGIN: '/login',
   SIGNUP: '/signup',
-  
+
   // User Routes
   USER_PROFILE: '/user/profile',
   USER_EVENTS: '/user/events',
   USER_ORDERS: '/user/orders',
-  
+
   // Admin Routes
   ADMIN_LOGIN: '/admin/login',
   ADMIN_DASHBOARD: '/admin/dashboard',
@@ -96,18 +96,22 @@ export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'im
 
 // Social Media Links (customize these)
 export const SOCIAL_LINKS = {
-  FACEBOOK: 'https://facebook.com/mayaverse',
-  TWITTER: 'https://twitter.com/mayaverse',
-  INSTAGRAM: 'https://instagram.com/mayaverse',
-  LINKEDIN: 'https://linkedin.com/company/mayaverse',
-  YOUTUBE: 'https://youtube.com/mayaverse',
+  FACEBOOK: '#',
+  TWITTER: '#',
+  INSTAGRAM: 'https://www.instagram.com/techvibesbit?igsh=dDhudDY2Mmc3NW9k',
+  LINKEDIN: 'https://www.linkedin.com/company/techvibesbit/',
+  YOUTUBE: '#',
 };
 
 // Contact Info (customize these)
 export const CONTACT_INFO = {
   EMAIL: 'contact@mayaverse.com',
-  PHONE: '+1 234 567 8900',
-  ADDRESS: '123 Tech Street, Innovation City, IC 12345',
+  PHONE: '+91 97733 52111', // Varun Tyagi Sir
+  ADDRESS: 'Mayaverse HQ',
+  TEAM: [
+    { NAME: 'Varun Tyagi Sir', PHONE: '+91 97733 52111' },
+    { NAME: 'Vansh Sir', PHONE: '+91 81144 82258' }
+  ]
 };
 
 // Validation Rules

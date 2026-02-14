@@ -10,27 +10,43 @@ const HeroScroll = () => {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const frameCount = 120;
+    const frameCount = 202; // 120 original + 82 new frames
     const fadeStartFrame = 95; // User requirement
 
     // Preload images
     useEffect(() => {
         const loadImages = async () => {
             const promises = [];
-            for (let i = 1; i <= frameCount; i++) {
-                // Determine source URL
+            
+            // Load first 120 frames (ezgif-frame-001.jpg to ezgif-frame-120.jpg)
+            for (let i = 1; i <= 120; i++) {
                 const paddedIndex = i.toString().padStart(3, '0');
                 const src = `/intro-assets/herosection_scroll/ezgif-frame-${paddedIndex}.jpg`;
 
-                // Create promise first
                 const promise = new Promise((resolve) => {
                     const img = new Image();
-                    img.onload = () => resolve(img);
+                    img.onload = () => resolve(img); 
                     img.onerror = () => {
                         console.error(`Failed to load frame ${i}`);
                         resolve(null);
                     };
-                    // Set src AFTER attaching listeners to ensure we don't miss events
+                    img.src = src;
+                });
+                promises.push(promise);
+            }
+            
+            // Load additional 82 frames (Create_a_dark_1080p_202602121634_000.webp to 081.webp)
+            for (let i = 0; i <= 81; i++) {
+                const paddedIndex = i.toString().padStart(3, '0');
+                const src = `/intro-assets/herosection_scroll/Create_a_dark_1080p_202602121634_${paddedIndex}.webp`;
+
+                const promise = new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.onerror = () => {
+                        console.error(`Failed to load new frame ${i}`);
+                        resolve(null);
+                    };
                     img.src = src;
                 });
                 promises.push(promise);
@@ -151,7 +167,7 @@ const HeroScroll = () => {
     };
 
     return (
-        <div ref={containerRef} style={{ height: '300vh', position: 'relative', backgroundColor: 'black' }}>
+        <div ref={containerRef} style={{ height: '505vh', position: 'relative', backgroundColor: 'black' }}>
             <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
                 <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} />
 
