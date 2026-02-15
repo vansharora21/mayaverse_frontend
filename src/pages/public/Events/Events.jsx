@@ -113,6 +113,9 @@ const Events = () => {
                     time: event.time,
                     venue: event.venue,
                     description: event.description,
+                    googleFormUrl: event.googleFormUrl,
+                    googleFormUrlForBIT: event.googleFormUrlForBIT,
+                    googleFormUrlForOthers: event.googleFormUrlForOthers,
                   }}
                   onRegister={handleRegister}
                 />

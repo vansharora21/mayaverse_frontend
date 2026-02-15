@@ -318,6 +318,102 @@
     }
 }
 
+/* ---------- GOOGLE FORM MODAL ---------- */
+.formBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.formContainer {
+    background: linear-gradient(135deg, #1a1525 0%, #2d1b42 100%);
+    border: 2px solid rgba(150, 100, 250, 0.3);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(150, 100, 250, 0.2);
+    position: relative;
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.formCloseBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(150, 100, 250, 0.2);
+    border: 1px solid rgba(150, 100, 250, 0.5);
+    color: white;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.formCloseBtn:hover {
+    background: rgba(150, 100, 250, 0.4);
+    border-color: rgba(150, 100, 250, 0.8);
+    transform: scale(1.1);
+}
+
+.formContent {
+    margin-top: 10px;
+}
+
+.formTitle {
+    color: #e0d5ff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 2px 10px rgba(150, 100, 250, 0.3);
+}
+
+.googleForm {
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Customize Google Form iframe styles */
+.googleForm ::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
     .wrapper {
@@ -331,6 +427,19 @@
 
     .stoneTitle {
         font-size: 1.15rem;
+    }
+
+    .formContainer {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .formTitle {
+        font-size: 1.25rem;
+    }
+
+    .googleForm {
+        height: 500px !important;
     }
 }
 
@@ -355,5 +464,29 @@
 
     .stoneDesc {
         font-size: 0.68rem;
+    }
+
+    .formBackdrop {
+        padding: 10px;
+    }
+
+    .formContainer {
+        padding: 15px;
+        max-height: 95vh;
+    }
+
+    .formTitle {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .googleForm {
+        height: 400px !important;
+    }
+
+    .formCloseBtn {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
     }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import styles from './RunestoneCard.module.css';
+import { useAuth } from '../../hooks/useAuth';
 
 /**
  * RunestoneCard — Video-driven event card with absolute frame synchronization.
@@ -12,6 +13,7 @@ const RunestoneCard = ({ event, onRegister }) => {
     // idle | opening | modal | closing
     const [state, setState] = useState('idle');
     const [locked, setLocked] = useState(false);
+    const [showGoogleForm, setShowGoogleForm] = useState(false);
 
     const cardRef = useRef(null);
     const videoContainerRef = useRef(null);
@@ -203,7 +205,8 @@ const RunestoneCard = ({ event, onRegister }) => {
         ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
         btn.appendChild(ripple);
         setTimeout(() => ripple.remove(), 800);
-        if (onRegister) onRegister(event.id);
+        // Show Google Form modal instead of calling onRegister callback
+        setShowGoogleForm(true);
     };
 
     const isIdle = state === 'idle';
@@ -296,8 +299,45 @@ const RunestoneCard = ({ event, onRegister }) => {
                     </button>
                 </div>
             </div>
+
+            {/* GOOGLE FORM MODAL */}
+            {showGoogleForm && (
+                <div className={styles.formBackdrop} onClick={() => setShowGoogleForm(false)}>
+                    <div className={styles.formContainer} onClick={(e) => e.stopPropagation()}>
+                        <button 
+                            className={styles.formCloseBtn}
+                            onClick={() => setShowGoogleForm(false)}
+                        >
+                            ✕
+                        </button>
+                        <div className={styles.formContent}>
+                            <h3 className={styles.formTitle}>Register for {event.title}</h3>
+                            <iframe
+                                src={getFormUrl() || event.googleFormUrl}
+                                width="100%"
+                                height="600"
+                                frameBorder="0"
+                                marginHeight="0"
+                                marginWidth="0"
+                                title="Event Registration Form"
+                                className={styles.googleForm}
+                            >
+                                Loading…
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
+};
+
+const getFormUrl = () => {
+    const { user } = useAuth();
+    if (user && user.email && user.email.endsWith('@bilmesra.ac.in')) {
+        return event.googleFormUrlForBIT || event.googleFormUrl;
+    }
+    return event.googleFormUrlForOthers || event.googleFormUrl;
 };
 
 export default RunestoneCard;
