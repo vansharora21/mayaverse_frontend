@@ -48,7 +48,7 @@ const Navbar = () => {
     <>
       {/* Header Strip */}
       <header className={`${styles.header} ${isVisible ? styles.headerVisible : styles.headerHidden}`}>
-        {/* Hamburger Button */}
+        {/* Mobile Hamburger - Visible only on small screens */}
         <button
           className={`${styles.hamburger} ${isOpen ? styles.hamburgerOpen : ''}`}
           onClick={toggleDrawer}
@@ -59,10 +59,22 @@ const Navbar = () => {
           <span className={styles.bar}></span>
         </button>
 
+        {/* Desktop Left Nav */}
+        <nav className={styles.leftNav}>
+          <Link to="/contacts" className={styles.desktopLink}>Contacts</Link>
+          <Link to="/gallery" className={styles.desktopLink}>Gallery</Link>
+        </nav>
+
         {/* Center Logo */}
         <Link to="/" className={styles.logo} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           PARALLAX
         </Link>
+
+        {/* Desktop Right Nav */}
+        <nav className={styles.rightNav}>
+          <Link to="/events" className={styles.desktopLink}>Events</Link>
+          <Link to="/about" className={styles.desktopLink}>About Us</Link>
+        </nav>
       </header>
 
       {/* Backdrop Overlay */}
