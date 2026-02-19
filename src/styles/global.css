@@ -33,6 +33,25 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Responsive font size scaling */
+@media (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}
+
 body {
   font-family: var(--font-primary);
   background-color: var(--bg-primary);
@@ -138,11 +157,51 @@ img {
   padding: 0 20px;
 }
 
+@media (max-width: 1024px) {
+  .container {
+    max-width: 960px;
+    padding: 0 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 10px;
+  }
+}
+
 .container-wide {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+@media (max-width: 1024px) {
+  .container-wide {
+    max-width: 1150px;
+    padding: 0 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-wide {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-wide {
+    padding: 0 10px;
+  }
 }
 
 /* Flex Utilities */
@@ -178,16 +237,61 @@ img {
   gap: 2rem;
 }
 
+@media (max-width: 768px) {
+  .grid-2 {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-2 {
+    gap: 1rem;
+  }
+}
+
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
 
+@media (max-width: 768px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
 .grid-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-4 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-4 {
+    gap: 1rem;
+  }
 }
 
 /* Text Utilities */
@@ -266,6 +370,10 @@ img {
     font-size: 1.75rem;
   }
 
+  h4 {
+    font-size: 1.25rem;
+  }
+
   .grid-4 {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -284,10 +392,70 @@ img {
     font-size: 1.5rem;
   }
 
+  h4 {
+    font-size: 1.1rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
   .grid-2,
   .grid-3,
   .grid-4 {
     grid-template-columns: 1fr;
+  }
+
+  .container,
+  .container-wide {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+  }
+
+  h4 {
+    font-size: 0.95rem;
+  }
+
+  h5 {
+    font-size: 0.9rem;
+  }
+
+  h6 {
+    font-size: 0.8rem;
+  }
+
+  p {
+    margin-bottom: 0.75rem;
+  }
+
+  .container,
+  .container-wide {
+    padding: 0 10px;
+  }
+
+  .grid-2 {
+    gap: 1rem;
+  }
+
+  .grid-3 {
+    gap: 1rem;
+  }
+
+  .grid-4 {
+    gap: 1rem;
   }
 }
 

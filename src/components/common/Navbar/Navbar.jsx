@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useResponsive } from '../../../animations/hooks/useResponsive';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
@@ -8,6 +9,7 @@ const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const isHomePage = location.pathname === '/' || location.pathname === '/home';
+  const { isMobile, isTablet } = useResponsive();
 
   useEffect(() => {
     const controlNavbar = () => {
