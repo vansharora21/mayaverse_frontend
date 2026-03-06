@@ -161,6 +161,18 @@ const About = () => {
         <div className={styles.container}>
           <div ref={contentRef} className="mb-16">
             <AboutSection />
+
+            <div className={styles.aboutContent}>
+              <h2>OUR VISION</h2>
+              <p>
+                To become the ultimate platform for aspiring technologists to converge, learn, and grow. We envision a future where innovation is deeply intertwined with collaborative problem-solving, creating a ripple effect that transforms ideas into reality and fosters a community of tech leaders.
+              </p>
+
+              <h2>OUR MISSION</h2>
+              <p>
+                Our mission is to foster a vibrant ecosystem that bridges the gap between theoretical knowledge and practical application. By hosting diverse events, technical workshops, and interactive sessions, we aim to equip students with the necessary skills and exposure to thrive in the ever-evolving world of technology.
+              </p>
+            </div>
           </div>
 
           {/* Values Grid */}
