@@ -29,7 +29,6 @@ const Timeline = () => {
             <div className={styles.bgRadials}></div>
 
             <header className={styles.header}>
-                <p className={styles.festLabel}>Annual Tech Festival &nbsp;·&nbsp; College of Engineering</p>
                 <h1>PARALLAX</h1>
                 <p className={styles.festYear}>2 0 2 6</p>
                 <p className={styles.headerSub}>Where magic meets innovation</p>
