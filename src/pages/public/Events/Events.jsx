@@ -60,17 +60,15 @@ const Events = () => {
         <div className={styles.container}>
           {/* Section Heading — always visible */}
           <div className="text-center mb-4">
-            <h2 className="font-cinzel text-4xl md:text-5xl font-bold tracking-[6px] uppercase"
+            <h2 className="text-2xl md:text-3xl font-bold tracking-[4px] uppercase"
               style={{
+                fontFamily: 'var(--font-primary)',
                 background: 'linear-gradient(135deg, #CFE8FF 0%, #B9A7FF 50%, #9EE6FF 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 filter: 'drop-shadow(0 0 18px rgba(155,140,255,0.55))',
               }}>
               TRIALS OF THE REALM
-              <br></br>
-              <br></br>
-              <br></br>
             </h2>
             <div className="mx-auto mt-4 h-px w-32 bg-gradient-to-r from-transparent via-[#00f2fe] to-transparent opacity-60" />
           </div>
@@ -81,14 +79,14 @@ const Events = () => {
               <div
                 key={event.id}
                 onClick={() => setSelectedEvent({ ...event, detailedDescription: generateRandomDetails() })}
-                className="border border-white/[0.2] flex flex-col items-start max-w-sm mx-auto p-4 relative h-[30rem] w-full cursor-pointer hover:border-white/50 transition-colors"
+                className="border border-white/[0.2] flex flex-col items-start max-w-[20rem] mx-auto p-4 relative h-[22rem] w-full cursor-pointer hover:border-white/50 transition-colors"
               >
 
                 <div className="w-full flex-grow relative overflow-hidden flex items-center justify-center">
                   <EvervaultCard text={event.title} />
                 </div>
 
-                <h2 className="text-white mt-4 text-sm font-light uppercase tracking-wider font-cinzel">
+                <h2 className="text-white mt-4 text-center w-full text-sm font-semibold uppercase tracking-wider" style={{ fontFamily: 'var(--font-primary)' }}>
                   {event.title}
                 </h2>
               </div>

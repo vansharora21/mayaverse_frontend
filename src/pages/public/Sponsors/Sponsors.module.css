@@ -4,15 +4,14 @@
 
 .sponsorsPage {
   width: 100%;
-  background: linear-gradient(180deg, #06060e 0%, #08060f 50%, #06060e 100%);
+  background: transparent;
   min-height: 100vh;
   color: #fff;
 }
 
 /* Hero Section */
 .heroSection {
-  background: radial-gradient(ellipse at 50% 100%, rgba(138, 100, 255, 0.2) 0%, transparent 60%),
-    linear-gradient(180deg, #0a0818 0%, #06060e 100%);
+  background: transparent;
   color: #fff;
   padding: 8rem 0 4rem;
   text-align: center;

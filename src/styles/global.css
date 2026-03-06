@@ -455,3 +455,8 @@ html {
   -ms-overflow-style: none;
   /* IE/Edge */
 }
+
+/* Hide Navbar when intro screen is active */
+body.intro-active header {
+  display: none !important;
+}

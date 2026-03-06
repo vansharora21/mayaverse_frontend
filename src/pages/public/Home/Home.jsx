@@ -23,13 +23,13 @@ const Home = () => {
 
   // Sync body class so Navbar knows when to hide (useLayoutEffect = before first paint)
   useLayoutEffect(() => {
-    if (showIntro) {
+    if (!videoRemoved) {
       document.body.classList.add('intro-active');
     } else {
       document.body.classList.remove('intro-active');
     }
     return () => document.body.classList.remove('intro-active');
-  }, [showIntro]);
+  }, [videoRemoved]);
 
   // Normal click-anywhere — fade out intro, play portal video
   const handleIntroClick = () => {
@@ -58,7 +58,12 @@ const Home = () => {
   };
 
   return (
-    <div className="home-container" style={{ backgroundColor: 'black', minHeight: '100vh', color: 'white' }}>
+    <div className="home-container" style={{
+      minHeight: '100vh',
+      color: 'white',
+      background: 'radial-gradient(ellipse at top, #0f1025, #000000)',
+      backgroundAttachment: 'fixed'
+    }}>
 
       {/* Intro overlay — only shown on first visit per session */}
       {showIntro && (
@@ -94,7 +99,7 @@ const Home = () => {
 
       {/* Main content */}
       <HeroScroll />
-      <div className="content-sections" style={{ position: 'relative', zIndex: 10, backgroundColor: '#06060e' }}>
+      <div className="content-sections" style={{ position: 'relative', zIndex: 10, backgroundColor: 'transparent' }}>
         <Events />
         <Sponsors />
         <Timeline />

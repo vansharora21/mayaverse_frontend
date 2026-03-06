@@ -42,7 +42,7 @@ export const EvervaultCard = ({ text, className }) => {
 
                 {/* The main text that reveals on hover inside the encrypted pattern */}
                 <div className="absolute inset-0 z-10 w-full flex items-center justify-center p-6 text-center">
-                    <span className="text-white z-20 font-bold text-2xl tracking-widest uppercase transition-opacity duration-300 opacity-0 group-hover/card:opacity-100" style={{ textShadow: "0 0 10px rgba(0,0,0,0.8)" }}>HOVER</span>
+                    <span className="text-white z-20 font-semibold text-sm tracking-widest uppercase transition-opacity duration-300 opacity-0 group-hover/card:opacity-100" style={{ textShadow: "0 0 10px rgba(0,0,0,0.8)", fontFamily: 'var(--font-primary)' }}>HOVER</span>
                 </div>
             </div>
         </div>
