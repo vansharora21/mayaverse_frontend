@@ -8,9 +8,6 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* Fade bottom into the sponsors section seamlessly */
-  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
 
 /* Hero */
