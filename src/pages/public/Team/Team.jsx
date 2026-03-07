@@ -24,7 +24,6 @@ const teamData = [
         title: 'Graphics & Creative',
         members: [
             { name: 'Manika Singh', role: 'Graphics Head', image: 'https://ui-avatars.com/api/?name=Manika+Singh&background=FF1493&color=fff' },
-            { name: 'Sanchit Pawa', role: 'Graphics Lead', image: 'https://ui-avatars.com/api/?name=Sanchit+Pawa&background=FF1493&color=fff' },
             { name: 'Abhishek', role: 'Graphics Designer', image: 'https://ui-avatars.com/api/?name=Abhishek&background=FF1493&color=fff' }
         ]
     },

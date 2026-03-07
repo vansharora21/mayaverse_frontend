@@ -337,6 +337,24 @@ export const mockEvents = [
     rules: ['Tournament format', 'Fair play rules'],
     googleFormUrl: 'https://forms.gle/Rum61AswAjc58qzy8',
   },
+  {
+    id: '21',
+    title: 'Panel Discussion',
+    description: 'Join us for an enlightened discussion with industry experts about the future of technology, AI, and the evolution of the digital realm. Gain insights into the latest trends and engage in a Q&A session with the pioneers.',
+    category: EVENT_CATEGORIES.TECHNICAL,
+    status: EVENT_STATUS.UPCOMING,
+    date: '2026-03-22',
+    time: '10:00 AM',
+    venue: 'Main Auditorium',
+    registrationFee: 0,
+    maxParticipants: 200,
+    currentParticipants: 0,
+    image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80&w=800',
+    organizer: 'Core Committee',
+    prizes: ['Participation Certificates'],
+    rules: ['Open for all students', 'Q&A session at the end'],
+    googleFormUrl: 'https://forms.gle/Rum61AswAjc58qzy8',
+  },
 ];
 
 
