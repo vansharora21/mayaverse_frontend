@@ -209,7 +209,7 @@ export const mockEvents = [
     organizer: 'Computing Society',
     prizes: ['Certificates', 'Goodies'],
     rules: ['Problem solving', 'Logical thinking'],
-    googleFormUrl: 'https://forms.gle/oAHd8zviGS2RuWg49',
+    googleFormUrl: 'https://practice.geeksforgeeks.org/contest/codewars-5739',
   },
   {
     id: '13',
