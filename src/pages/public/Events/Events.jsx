@@ -21,7 +21,7 @@ const Events = () => {
   const navigate = useNavigate();
 
   const getFormUrl = () => {
-    return 'https://forms.gle/Rum61AswAjc58qzy8';
+    return selectedEvent?.googleFormUrl || 'https://forms.gle/Rum61AswAjc58qzy8';
   };
 
   const closeModals = () => {
@@ -166,6 +166,31 @@ const Events = () => {
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Embedded Google Form Modal */}
+      {showGoogleForm && (
+        <div className={styles.formOverlay} onClick={closeModals}>
+          <div className={styles.formModal} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.formClose} onClick={closeModals} aria-label="Close form">
+              ✕
+            </button>
+            <div className={styles.formHeader}>
+              <span className={styles.formTag}>Event Registration</span>
+              <h3 className={styles.formTitle}>{selectedEvent?.title}</h3>
+            </div>
+            <iframe
+              src={getFormUrl()}
+              className={styles.formIframe}
+              title="Event Registration Form"
+              frameBorder="0"
+              marginHeight="0"
+              marginWidth="0"
+            >
+              Loading form…
+            </iframe>
           </div>
         </div>
       )}
