@@ -177,7 +177,7 @@ export const mockEvents = [
   },
   {
     id: '11',
-    title: 'HACKATHON',
+    title: 'Kurukshetra – Mahabharat of Codes',
     description: 'Kurukshetra is a high-intensity battleground for rapid innovation where teams compete to design and build functional solutions within a strict time limit.',
     category: EVENT_CATEGORIES.COMPETITION,
     status: EVENT_STATUS.UPCOMING,
@@ -363,7 +363,7 @@ export const mockSponsors = [
   {
     id: '1',
     name: 'Bank of Baroda',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Bank_of_Baroda_logo.svg',
+    logo: new URL('../assets/images/sponsors/bank_of_baroda.png', import.meta.url).href,
     tier: 'Premium',
     website: 'https://www.bankofbaroda.in/',
     subtitle: 'Title Sponsor'
@@ -385,35 +385,35 @@ export const mockSponsors = [
   {
     id: '4',
     name: 'StockGro',
-    logo: 'https://play-lh.googleusercontent.com/D2DLHQVF0aUUWCfgxiV27uMt9Fy5H9GbRlSm9oPHkwT2-qHcnPiw7pqQfKl9rGWv3oo=w240-h480-rw',
+    logo: new URL('../assets/images/sponsors/stockgro.png', import.meta.url).href,
     tier: 'Ally',
     website: 'https://stockgro.com',
   },
   {
     id: '5',
     name: 'Devnovate',
-    logo: 'https://devnovate.co/wp-content/uploads/2023/04/Devnovate-Logo.png',
+    logo: new URL('../assets/images/sponsors/devnovate.png', import.meta.url).href,
     tier: 'Ally',
     website: 'https://devnovate.co',
   },
   {
     id: '6',
     name: 'Bake Away',
-    logo: 'https://images.deliveryhero.io/image/fd-pk/LH/vpt5-hero.jpg',
+    logo: new URL('../assets/images/sponsors/bake_away.jpg', import.meta.url).href,
     tier: 'Supporter',
     website: '#',
   },
   {
     id: '7',
     name: 'Belgian Waffle Co.',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/The_Belgian_Waffle_Co._Logo.png/320px-The_Belgian_Waffle_Co._Logo.png',
+    logo: new URL('../assets/images/sponsors/belgian_waffle_co.png', import.meta.url).href,
     tier: 'Supporter',
     website: '#',
   },
   {
     id: '8',
     name: 'Chai Zindagi',
-    logo: 'https://chaizindagi.com/wp-content/uploads/2022/01/chai-zindagi-logo.png',
+    logo: new URL('../assets/images/sponsors/chai_zindagi.jpg', import.meta.url).href,
     tier: 'Supporter',
     website: 'https://chaizindagi.com/',
   },
