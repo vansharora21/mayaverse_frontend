@@ -101,7 +101,7 @@ export const mockEvents = [
     organizer: 'Robotics Club',
     prizes: ['Certificates', 'Goodies'],
     rules: ['1 vs 1 format', 'Manual control only'],
-    googleFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfbUhCQ3taDQcrbjEZooQ-B6tYKoIObtceUBaBH_CfoVLENdA/viewform?usp=sharing&ouid=101011667818086373125',
+    googleFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfbUhCQ3taDQcrbjEZooQ-B6tYKoIObtceUBaBH_CfoVLENdA/viewform?embedded=true',
   },
   {
     id: '5',
@@ -355,7 +355,7 @@ export const mockEvents = [
     rules: ['Open for all students', 'Q&A session at the end'],
     googleFormUrl: 'https://forms.gle/Rum61AswAjc58qzy8',
   },
- ];
+];
 
 
 // Mock Sponsors

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { EvervaultCard } from '../../ui/evervault-card';
+import { mockEvents } from '../../../services/mockData';
 import styles from './FlagshipEvents.module.css';
+import eventStyles from '../../../pages/public/Events/Events.module.css';
 
 const mockFlagshipEvents = [
   { id: 1, title: 'TECHX (Opening Ceremony)', date: 'TBD', venue: 'TBD' },
@@ -31,6 +33,32 @@ const FlagshipEvents = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(3);
+  const [showGoogleForm, setShowGoogleForm] = useState(false);
+
+  // Map flagship events to full event data from mockData
+  const getFullEventData = (title) => {
+    // Basic normalization of titles to match
+    const normalizedTitle = title.split('(')[0].trim().toLowerCase();
+    return mockEvents.find(e =>
+      e.title.toLowerCase().includes(normalizedTitle) ||
+      normalizedTitle.includes(e.title.toLowerCase())
+    );
+  };
+
+  const handleRegisterClick = (e, event) => {
+    e.stopPropagation();
+    const fullEvent = getFullEventData(event.title);
+    if (fullEvent) {
+      setSelectedEvent({ ...event, ...fullEvent });
+      setShowGoogleForm(true);
+    } else {
+      alert(`Registration for ${event.title} will open soon!`);
+    }
+  };
+
+  const closeForm = () => {
+    setShowGoogleForm(false);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -183,11 +211,36 @@ const FlagshipEvents = () => {
             </div>
 
             <button
-              onClick={() => alert(`Registered for ${selectedEvent.title}!`)}
+              onClick={(e) => handleRegisterClick(e, selectedEvent)}
               className="w-full py-3 bg-gradient-to-r from-[#FFB7B2] to-[#E284FF] hover:from-[#E284FF] hover:to-[#9EE6FF] text-white font-bold rounded-lg shadow-lg hover:shadow-purple-500/25 transition-all text-sm uppercase tracking-wider cursor-pointer"
             >
               Register Now
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Google Form Modal */}
+      {showGoogleForm && (
+        <div className={eventStyles.formOverlay} onClick={closeForm}>
+          <div className={eventStyles.formModal} onClick={(e) => e.stopPropagation()}>
+            <button className={eventStyles.formClose} onClick={closeForm} aria-label="Close form">
+              ✕
+            </button>
+            <div className={eventStyles.formHeader}>
+              <span className={eventStyles.formTag}>Event Registration</span>
+              <h3 className={eventStyles.formTitle}>{selectedEvent?.title}</h3>
+            </div>
+            <iframe
+              src={selectedEvent?.googleFormUrl}
+              className={eventStyles.formIframe}
+              title="Event Registration Form"
+              frameBorder="0"
+              marginHeight="0"
+              marginWidth="0"
+            >
+              Loading form…
+            </iframe>
           </div>
         </div>
       )}

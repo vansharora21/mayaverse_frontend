@@ -58,7 +58,7 @@ const Timeline = () => {
                     <div className={styles.phaseDot}></div>
                     <div className={styles.phaseNum}>02</div>
                     <div className={styles.phaseConnector}></div>
-                    <a className={styles.phaseCard} href="https://forms.gle/Rum61AswAjc58qzy8" target="_blank" rel="noopener noreferrer">
+                    <a className={styles.phaseCard} href="https://docs.google.com/forms/d/e/1FAIpQLSfbUhCQ3taDQcrbjEZooQ-B6tYKoIObtceUBaBH_CfoVLENdA/viewform?embedded=true" target="_blank" rel="noopener noreferrer">
                         <p className={styles.phaseTag}>Event 02</p>
                         <h2 className={styles.phaseTitle}>Robo Soccer</h2>
                         <p className={styles.phaseTime}>11 March 2026 &nbsp;·&nbsp; 1:00 PM Onwards</p>
