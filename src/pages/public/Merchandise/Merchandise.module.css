@@ -116,6 +116,29 @@
   object-fit: cover;
 }
 
+.blurredImage {
+  filter: blur(12px) brightness(0.6);
+  transition: filter 0.4s ease;
+}
+
+.revealedOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(1.2rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  z-index: 10;
+  text-shadow: 0 0 20px rgba(255, 0, 222, 0.8), 0 0 40px rgba(138, 124, 255, 0.8);
+  pointer-events: none;
+  width: 100%;
+  text-align: center;
+}
+
 .sliderDots {
   position: absolute;
   bottom: 2rem;

@@ -113,7 +113,8 @@ const Merchandise = () => {
                     key={idx}
                     className={`${styles.slide} ${idx === currentImageIndex ? styles.activeSlide : ''}`}
                   >
-                    <img src={img} alt={`Mayaverse Merch ${idx + 1}`} className={styles.productImage} />
+                    <img src={img} alt={`Mayaverse Merch ${idx + 1}`} className={`${styles.productImage} ${styles.blurredImage}`} />
+                    <div className={styles.revealedOverlay}>TO BE REVEALED</div>
                   </div>
                 ))}
               </div>
