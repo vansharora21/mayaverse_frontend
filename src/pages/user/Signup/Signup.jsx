@@ -77,14 +77,18 @@ const Signup = () => {
         app_name: APP_NAME,
       };
 
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        templateParams,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      );
-
-      setStep('otp');
+      try {
+        await emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          templateParams,
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        );
+        setStep('otp');
+      } catch (e) {
+        console.error('EmailJS Error:', e);
+        setError(`OTP Delivery Failed: ${e.text || e.message || 'Check your EmailJS settings'}`);
+      }
     } catch (err) {
       setError(err.message || 'Registration failed. Please try again.');
     } finally {
