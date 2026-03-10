@@ -555,7 +555,7 @@ export const mockSponsors = [
   },
   {
     id: '7',
-    name: 'Belgian Waffle Co.',
+    name: 'Belgian Waffle',
     logo: new URL('../assets/images/sponsors/WhatsApp Image 2026-03-10 at 6.21.29 PM.jpeg', import.meta.url).href,
     tier: 'Supporter',
     website: '#',
