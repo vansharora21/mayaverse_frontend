@@ -556,7 +556,7 @@ export const mockSponsors = [
   {
     id: '7',
     name: 'Belgian Waffle Co.',
-    logo: new URL('../assets/images/sponsors/belgian_waffle_co.png', import.meta.url).href,
+    logo: new URL('../assets/images/sponsors/WhatsApp Image 2026-03-10 at 6.21.29 PM.jpeg', import.meta.url).href,
     tier: 'Supporter',
     website: '#',
   },
@@ -566,6 +566,20 @@ export const mockSponsors = [
     logo: new URL('../assets/images/sponsors/chai_zindagi.jpg', import.meta.url).href,
     tier: 'Supporter',
     website: 'https://chaizindagi.com/',
+  },
+  {
+    id: '9',
+    name: 'Haunted House',
+    logo: new URL('../assets/images/sponsors/WhatsApp Image 2026-03-10 at 6.13.27 PM.jpeg', import.meta.url).href,
+    tier: 'Supporter',
+    website: '#',
+  },
+  {
+    id: '10',
+    name: 'Jay Bhavani',
+    logo: new URL('../assets/images/sponsors/Screenshot 2026-03-10 183317.png', import.meta.url).href,
+    tier: 'Supporter',
+    website: '#',
   },
 ];
 

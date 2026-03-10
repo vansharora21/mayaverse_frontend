@@ -22,6 +22,8 @@ const SUPPORTER_LOGOS = [
     { name: 'Bake Away', slug: 'cakey' },
     { name: 'Belgian Waffle', slug: 'waffle' },
     { name: 'Chai Zindagi', slug: 'tea' },
+    { name: 'Haunted House', slug: 'hauntedhouse' },
+    { name: 'JBV', slug: 'jbv' },
 ];
 
 const ICON_CDN = (slug) => `https://cdn.simpleicons.org/${slug}/ffffff`;
